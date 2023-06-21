@@ -1,4 +1,7 @@
 import { autobind } from './decorators';
+import { validate } from './validation';
+import { IValidation } from './types';
+
 import './style.css'
 
 class ProjectInput {
@@ -35,7 +38,25 @@ class ProjectInput {
     const enteredDescription = this.descriptionInputElement.value;
     const enteredPeople = this.peopleInputElement.value;
 
-    if (enteredTitle.trim().length === 0 || enteredDescription.trim().length === 0 || enteredPeople.trim().length === 0) {
+    const titleValidatable: IValidation = {
+      value: enteredTitle,
+      required: true
+    }
+
+    const descriptionValidatable: IValidation = {
+      value: enteredDescription,
+      required: true,
+      minLength: 5
+    }
+
+    const peopleValidatable: IValidation = {
+      value: +enteredPeople,
+      required: true,
+      min: 1,
+      max: 5
+    }
+
+    if (!validate(titleValidatable) || !validate(descriptionValidatable) || !validate(peopleValidatable)) {
       alert('Invalit input, please try again!');
       return;
     } else {
@@ -71,5 +92,4 @@ class ProjectInput {
 }
 
 const prjInput = new ProjectInput();
-
 
