@@ -1,5 +1,5 @@
-import ProjectInput from './project-input';
-import ProjectList from './project-list';
+import ProjectInput from './components/project-input';
+import ProjectList from './components/project-list';
 
 import './style.css'
 

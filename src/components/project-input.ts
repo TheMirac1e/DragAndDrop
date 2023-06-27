@@ -1,6 +1,6 @@
-import { autobind } from "./decorators";
-import { IValidation } from "./types";
-import { validate } from "./validation";
+import { autobind } from "../helpres/decorators";
+import { IValidation } from "../types/types";
+import { validate } from "../helpres/validation";
 
 class ProjectInput {
   templateElement: HTMLTemplateElement;
