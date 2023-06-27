@@ -1,10 +1,11 @@
 import { projectState } from "../main";
+import Project from './project.ts'
 
 class ProjectList {
   templateElement: HTMLTemplateElement;
   hostElement: HTMLDivElement;
   element: HTMLElement;
-  assignedProjects: any[];
+  assignedProjects: Project[];
 
   constructor(private type: 'active' | 'finished') {
     this.templateElement = document.getElementById('project-list')! as HTMLTemplateElement;
@@ -29,7 +30,7 @@ class ProjectList {
       const listItem = document.createElement('li');
       listItem.textContent = prjItem.title;
 
-      listEl.appendChild(listItem);
+      listEl!.appendChild(listItem);
     }
   }
 

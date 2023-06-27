@@ -1,7 +1,9 @@
+import Project from './project.ts'
+import {ProjectStatus, TListener} from "../types/types.ts";
 
 class ProjectState {
-  private listeners: any[] = [];
-  private projects: any[] = [];
+  private listeners: TListener[] = [];
+  private projects: Project[] = [];
   private static instance: ProjectState;
 
   private constructor() {
@@ -18,18 +20,13 @@ class ProjectState {
     return this.instance;
   }
 
-  addListener(listenerFn: Function) {
+  addListener(listenerFn: TListener) {
     this.listeners.push(listenerFn);
 
   }
 
   public addProject(title: string, description: string, numOfPeople: number) {
-    const newProject = {
-      id: Math.random().toString(),
-      title: title,
-      description: description,
-      people: numOfPeople
-    }
+    const newProject = new Project(Math.random().toString(), title, description, numOfPeople, ProjectStatus.Active)
     this.projects.push(newProject);
     console.log(this.projects);
     for (const listenersFn of this.listeners) {
