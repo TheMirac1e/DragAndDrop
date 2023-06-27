@@ -1,6 +1,7 @@
 import { autobind } from "../helpres/decorators";
 import { IValidation } from "../types/types";
 import { validate } from "../helpres/validation";
+import { projectState } from "../main";
 
 class ProjectInput {
   templateElement: HTMLTemplateElement;
@@ -75,7 +76,7 @@ class ProjectInput {
 
     if (Array.isArray(userInput)) {
       const [title, description, people] = userInput;
-      console.log(title, description, people);
+      projectState.addProject(title, description, people);
       this.clearInputs();
     }
   }
