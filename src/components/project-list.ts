@@ -1,5 +1,6 @@
 import { projectState } from "../main";
 import Project from './project.ts'
+import {ProjectStatus} from "../types/types.ts";
 
 class ProjectList {
   templateElement: HTMLTemplateElement;
@@ -17,7 +18,13 @@ class ProjectList {
     this.element = importedNode.firstElementChild as HTMLElement;
     this.element.id = `${this.type}-projects`;
     projectState.addListener((projects: any) => {
-      this.assignedProjects = projects;
+      const relevantProjects = projects.filter((prj: any) => {
+        if(this.type === 'active') {
+          return prj.status === ProjectStatus.Active
+        }
+        return prj.status === ProjectStatus.Finished
+      });
+      this.assignedProjects = relevantProjects;
       this.renderProjects();
     });
     this.attach();
@@ -25,12 +32,13 @@ class ProjectList {
   }
 
   private renderProjects() {
-    const listEl = document.getElementById(`${this.type}-projects-list`);
+    const listEl = document.getElementById(`${this.type}-projects-list`)!;
+    listEl.innerHTML = '';
     for(const prjItem of this.assignedProjects) {
       const listItem = document.createElement('li');
       listItem.textContent = prjItem.title;
 
-      listEl!.appendChild(listItem);
+      listEl.appendChild(listItem);
     }
   }
 
