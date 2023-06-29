@@ -1,5 +1,3 @@
-import Project from "../components/project.ts";
-
 export interface IValidation {
   value: string | number;
   required?: boolean;
@@ -9,7 +7,7 @@ export interface IValidation {
   max?: number;
 }
 
-export type TListener = (items: Project[]) => void;
+export type TListener<T> = (items: T[]) => void;
 
 export enum ProjectStatus {
   Active,

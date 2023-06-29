@@ -1,13 +1,13 @@
 import Project from './project.ts'
-import {ProjectStatus, TListener} from "../types/types.ts";
+import {ProjectStatus} from "../types/types.ts";
+import StateAbstract from "./state-abstract.ts";
 
-class ProjectState {
-  private listeners: TListener[] = [];
+class ProjectState extends StateAbstract<Project>{
   private projects: Project[] = [];
   private static instance: ProjectState;
 
   private constructor() {
-
+    super()
   }
 
   static getInstance() {
@@ -18,11 +18,6 @@ class ProjectState {
     this.instance = new ProjectState();
 
     return this.instance;
-  }
-
-  addListener(listenerFn: TListener) {
-    this.listeners.push(listenerFn);
-
   }
 
   public addProject(title: string, description: string, numOfPeople: number) {
