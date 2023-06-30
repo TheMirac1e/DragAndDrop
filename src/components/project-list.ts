@@ -18,14 +18,17 @@ class ProjectList extends ComponentAbstract<HTMLDivElement, HTMLElement> impleme
 
   @autobind
   dragOverHandler(event: DragEvent) {
-    const listElement = this.element.querySelector('ul')!;
+    if(event.dataTransfer && event.dataTransfer.types[0] === 'text/plain') {
+      event.preventDefault();
 
-    listElement.classList.add('droppable');
+      const listElement = this.element.querySelector('ul')!;
+      listElement.classList.add('droppable');
+    }
   }
 
   @autobind
   dropHandler(event: DragEvent) {
-
+    console.log(event.dataTransfer!.getData('text/plain'));
   }
 
   @autobind

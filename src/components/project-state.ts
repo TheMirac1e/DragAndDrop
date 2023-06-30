@@ -23,7 +23,7 @@ class ProjectState extends StateAbstract<Project>{
   public addProject(title: string, description: string, numOfPeople: number) {
     const newProject = new Project(Math.random().toString(), title, description, numOfPeople, ProjectStatus.Active)
     this.projects.push(newProject);
-    console.log(this.projects);
+
     for (const listenersFn of this.listeners) {
       listenersFn(this.projects.slice());
     }
