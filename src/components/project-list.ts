@@ -2,6 +2,7 @@ import { projectState } from "../main";
 import Project from './project.ts'
 import {ProjectStatus} from "../types/types.ts";
 import ComponentAbstract from "./component-abstract.ts";
+import ProjectItem from "./project-item.ts";
 
 class ProjectList extends ComponentAbstract<HTMLDivElement, HTMLElement>{
   assignedProjects: Project[];
@@ -32,11 +33,9 @@ class ProjectList extends ComponentAbstract<HTMLDivElement, HTMLElement>{
   private renderProjects() {
     const listEl = document.getElementById(`${this.type}-projects-list`)!;
     listEl.innerHTML = '';
-    for(const prjItem of this.assignedProjects) {
-      const listItem = document.createElement('li');
-      listItem.textContent = prjItem.title;
 
-      listEl.appendChild(listItem);
+    for(const prjItem of this.assignedProjects) {
+      new ProjectItem(this.element.querySelector('ul')!.id, prjItem);
     }
   }
 
