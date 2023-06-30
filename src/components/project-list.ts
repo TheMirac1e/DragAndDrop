@@ -1,10 +1,11 @@
 import { projectState } from "../main";
 import Project from './project.ts'
-import {ProjectStatus} from "../types/types.ts";
+import {IDragTarget, ProjectStatus} from "../types/types.ts";
 import ComponentAbstract from "./component-abstract.ts";
 import ProjectItem from "./project-item.ts";
+import {autobind} from "../helpres/decorators.ts";
 
-class ProjectList extends ComponentAbstract<HTMLDivElement, HTMLElement>{
+class ProjectList extends ComponentAbstract<HTMLDivElement, HTMLElement> implements IDragTarget {
   assignedProjects: Project[];
 
   constructor(private type: 'active' | 'finished') {
@@ -15,8 +16,31 @@ class ProjectList extends ComponentAbstract<HTMLDivElement, HTMLElement>{
     this.renderContent();
   }
 
+  @autobind
+  dragOverHandler(event: DragEvent) {
+    const listElement = this.element.querySelector('ul')!;
+
+    listElement.classList.add('droppable');
+  }
+
+  @autobind
+  dropHandler(event: DragEvent) {
+
+  }
+
+  @autobind
+  dragLeaveHandler(event: DragEvent) {
+    const listElement = this.element.querySelector('ul')!;
+
+    listElement.classList.remove('droppable');
+  }
+
   configure() {
-    projectState.addListener((projects: any) => {
+    this.element.addEventListener('dragover', this.dragOverHandler);
+    this.element.addEventListener('dragleave', this.dragLeaveHandler);
+    this.element.addEventListener('drop', this.dropHandler);
+
+    projectState.addListener((projects: Project[]) => {
       const relevantProjects = projects.filter((prj: any) => {
         if(this.type === 'active') {
           return prj.status === ProjectStatus.Active
