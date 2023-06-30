@@ -1,4 +1,4 @@
-import { projectState } from "../main";
+import {projectState} from "../main";
 import Project from './project.ts'
 import {IDragTarget, ProjectStatus} from "../types/types.ts";
 import ComponentAbstract from "./component-abstract.ts";
@@ -28,7 +28,8 @@ class ProjectList extends ComponentAbstract<HTMLDivElement, HTMLElement> impleme
 
   @autobind
   dropHandler(event: DragEvent) {
-    console.log(event.dataTransfer!.getData('text/plain'));
+   const prjId = event.dataTransfer!.getData('text/plain');
+   projectState.moveProject(prjId, this.type === 'active' ? ProjectStatus.Active : ProjectStatus.Finished);
   }
 
   @autobind
