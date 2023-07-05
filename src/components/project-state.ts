@@ -1,6 +1,6 @@
 import Project from './project.ts'
-import {ProjectStatus} from "../types/types.ts";
-import StateAbstract from "./state-abstract.ts";
+import { ProjectStatus } from "../types/types.ts";
+import StateAbstract from "./abstract/state-abstract.ts";
 
 class ProjectState extends StateAbstract<Project>{
   private projects: Project[] = [];
@@ -28,11 +28,11 @@ class ProjectState extends StateAbstract<Project>{
   }
 
   moveProject(projectId: string, newStatus: ProjectStatus) {
-     const projects = this.projects.find(prj => prj.id === projectId);
-     if(projects && projects.status !== newStatus) {
-       projects.status = newStatus;
-       this.updateListeners();
-     }
+    const projects = this.projects.find(prj => prj.id === projectId);
+    if (projects && projects.status !== newStatus) {
+      projects.status = newStatus;
+      this.updateListeners();
+    }
   }
 
   updateListeners() {

@@ -2,7 +2,7 @@ import { autobind } from "../helpres/decorators";
 import { IValidation } from "../types/types";
 import { validate } from "../helpres/validation";
 import { projectState } from "../main";
-import ComponentAbstract from "./component-abstract.ts";
+import ComponentAbstract from "./abstract/component-abstract.ts";
 
 class ProjectInput extends ComponentAbstract<HTMLDivElement, HTMLFormElement>{
   titleInputElement: HTMLInputElement;
@@ -23,7 +23,7 @@ class ProjectInput extends ComponentAbstract<HTMLDivElement, HTMLFormElement>{
     this.element.addEventListener('submit', this.submitHandler);
   }
 
-  renderedContent() {}
+  renderedContent() { }
 
   private gatherUserInput(): [string, string, number] | void {
     const enteredTitle = this.titleInputElement.value;

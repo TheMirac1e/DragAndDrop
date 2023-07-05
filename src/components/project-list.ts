@@ -1,9 +1,9 @@
-import {projectState} from "../main";
+import { projectState } from "../main";
 import Project from './project.ts'
-import {IDragTarget, ProjectStatus} from "../types/types.ts";
-import ComponentAbstract from "./component-abstract.ts";
+import { IDragTarget, ProjectStatus } from "../types/types.ts";
+import ComponentAbstract from "./abstract/component-abstract.ts";
 import ProjectItem from "./project-item.ts";
-import {autobind} from "../helpres/decorators.ts";
+import { autobind } from "../helpres/decorators.ts";
 
 class ProjectList extends ComponentAbstract<HTMLDivElement, HTMLElement> implements IDragTarget {
   assignedProjects: Project[];
@@ -18,7 +18,7 @@ class ProjectList extends ComponentAbstract<HTMLDivElement, HTMLElement> impleme
 
   @autobind
   dragOverHandler(event: DragEvent) {
-    if(event.dataTransfer && event.dataTransfer.types[0] === 'text/plain') {
+    if (event.dataTransfer && event.dataTransfer.types[0] === 'text/plain') {
       event.preventDefault();
 
       const listElement = this.element.querySelector('ul')!;
@@ -28,12 +28,12 @@ class ProjectList extends ComponentAbstract<HTMLDivElement, HTMLElement> impleme
 
   @autobind
   dropHandler(event: DragEvent) {
-   const prjId = event.dataTransfer!.getData('text/plain');
-   projectState.moveProject(prjId, this.type === 'active' ? ProjectStatus.Active : ProjectStatus.Finished);
+    const prjId = event.dataTransfer!.getData('text/plain');
+    projectState.moveProject(prjId, this.type === 'active' ? ProjectStatus.Active : ProjectStatus.Finished);
   }
 
   @autobind
-  dragLeaveHandler(event: DragEvent) {
+  dragLeaveHandler(_: DragEvent) {
     const listElement = this.element.querySelector('ul')!;
 
     listElement.classList.remove('droppable');
@@ -46,7 +46,7 @@ class ProjectList extends ComponentAbstract<HTMLDivElement, HTMLElement> impleme
 
     projectState.addListener((projects: Project[]) => {
       const relevantProjects = projects.filter((prj: any) => {
-        if(this.type === 'active') {
+        if (this.type === 'active') {
           return prj.status === ProjectStatus.Active
         }
         return prj.status === ProjectStatus.Finished
@@ -56,13 +56,13 @@ class ProjectList extends ComponentAbstract<HTMLDivElement, HTMLElement> impleme
     });
   }
 
-  renderedContent() {}
+  renderedContent() { }
 
   private renderProjects() {
     const listEl = document.getElementById(`${this.type}-projects-list`)!;
     listEl.innerHTML = '';
 
-    for(const prjItem of this.assignedProjects) {
+    for (const prjItem of this.assignedProjects) {
       new ProjectItem(this.element.querySelector('ul')!.id, prjItem);
     }
   }

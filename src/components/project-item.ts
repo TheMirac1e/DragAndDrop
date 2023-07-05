@@ -1,7 +1,7 @@
-import ComponentAbstract from "./component-abstract.ts";
+import ComponentAbstract from "./abstract/component-abstract.ts";
 import Project from "./project.ts";
-import {IDraggable} from "../types/types.ts";
-import {autobind} from "../helpres/decorators.ts";
+import { IDraggable } from "../types/types.ts";
+import { autobind } from "../helpres/decorators.ts";
 
 class ProjectItem extends ComponentAbstract<HTMLUListElement, HTMLLIElement> implements IDraggable {
     private project: Project;
@@ -30,9 +30,7 @@ class ProjectItem extends ComponentAbstract<HTMLUListElement, HTMLLIElement> imp
     }
 
     @autobind
-    dragEndHandler(_: DragEvent) {
-        console.log('drag end');
-    }
+    dragEndHandler(_: DragEvent) { }
 
     configure() {
         this.element.addEventListener('dragstart', this.dragStartHandler);
