@@ -2,7 +2,7 @@ import { autobind } from "../helpres/decorators";
 import { IValidation } from "../types/types";
 import { validate } from "../helpres/validation";
 import { projectState } from "../main";
-import ComponentAbstract from "./abstract/component-abstract.ts";
+import ComponentAbstract from "./abstract/component-abstract";
 
 class ProjectInput extends ComponentAbstract<HTMLDivElement, HTMLFormElement>{
   titleInputElement: HTMLInputElement;

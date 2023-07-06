@@ -1,4 +1,4 @@
-import {TListener} from "../types/types.ts";
+import {TListener} from "../../types/types";
 
 class StateAbstract<T> {
     protected listeners: TListener<T>[] = [];

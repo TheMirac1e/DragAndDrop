@@ -1,9 +1,9 @@
 import { projectState } from "../main";
-import Project from './project.ts'
-import { IDragTarget, ProjectStatus } from "../types/types.ts";
-import ComponentAbstract from "./abstract/component-abstract.ts";
-import ProjectItem from "./project-item.ts";
-import { autobind } from "../helpres/decorators.ts";
+import Project from './project'
+import { IDragTarget, ProjectStatus } from "../types/types";
+import ComponentAbstract from "./abstract/component-abstract";
+import ProjectItem from "./project-item";
+import { autobind } from "../helpres/decorators";
 
 class ProjectList extends ComponentAbstract<HTMLDivElement, HTMLElement> implements IDragTarget {
   assignedProjects: Project[];

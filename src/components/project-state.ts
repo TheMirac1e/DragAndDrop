@@ -1,6 +1,6 @@
-import Project from './project.ts'
-import { ProjectStatus } from "../types/types.ts";
-import StateAbstract from "./abstract/state-abstract.ts";
+import Project from './project'
+import { ProjectStatus } from "../types/types";
+import StateAbstract from "./abstract/state-abstract";
 
 class ProjectState extends StateAbstract<Project>{
   private projects: Project[] = [];

@@ -1,7 +1,7 @@
-import ComponentAbstract from "./abstract/component-abstract.ts";
-import Project from "./project.ts";
-import { IDraggable } from "../types/types.ts";
-import { autobind } from "../helpres/decorators.ts";
+import ComponentAbstract from "./abstract/component-abstract";
+import Project from "./project";
+import { IDraggable } from "../types/types";
+import { autobind } from "../helpres/decorators";
 
 class ProjectItem extends ComponentAbstract<HTMLUListElement, HTMLLIElement> implements IDraggable {
     private project: Project;

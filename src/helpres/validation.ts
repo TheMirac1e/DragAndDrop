@@ -1,4 +1,4 @@
-import { IValidation } from "./types";
+import { IValidation } from "../types/types";
 
 export function validate(validateInput: IValidation) {
   let isValid = true;
